@@ -10,7 +10,9 @@ module Carmen
         Dir[path + '**/*.yml']
       }.flatten.compact
       Carmen.i18n_backend = ::I18n
-      config.i18n.load_path += paths
+      config.before_initialize do
+        ::I18n.load_path += paths
+      end
 
       # Enable fallbacks so that missing translations use the default locale
       config.i18n.fallbacks = true
